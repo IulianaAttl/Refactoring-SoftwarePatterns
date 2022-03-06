@@ -1,4 +1,5 @@
 package redmondn;
+
 import java.util.ArrayList; 
 
 public class Customer {
@@ -93,9 +94,6 @@ public class Customer {
 		this.DOB = DOB;
 	}
 	
-
-
-	
 	public void setCustomerID(String customerID)
 	{
 		this.customerID = customerID;
@@ -118,7 +116,6 @@ public class Customer {
 				+ "First Name = " + this.firstName + "\n"
 				+ "Date of Birth = " + this.DOB + "\n"
 				+ "Customer ID = " + this.customerID;
-			
 	}
 	
 }

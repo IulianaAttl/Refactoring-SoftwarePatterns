@@ -6,6 +6,7 @@ public class CustomerAccount  {
    
 	String number;
 	double balance;
+	
 	ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 
 	//Blank Constructor
@@ -30,9 +31,6 @@ public class CustomerAccount  {
 	{
 		return this.number;
 	}
-	
-	
-
 	
 	public double getBalance()
 	{
@@ -59,7 +57,4 @@ public class CustomerAccount  {
 	{
 		this.transactionList = transactionList;
 	}
-	
-	
-	
 }
