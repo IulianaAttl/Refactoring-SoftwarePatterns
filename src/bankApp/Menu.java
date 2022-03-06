@@ -26,6 +26,7 @@ public class Menu extends JFrame {
     private JPanel panel2;
     private JButton addCustomer;
     private ExistingUser eu = new ExistingUser();
+    private AdminUser au = new AdminUser();
 
     public static void main(String[] args) {
         Menu driver = new Menu();
@@ -156,8 +157,7 @@ public class Menu extends JFrame {
                 // if user select ADMIN----------------------------------------------------------------------------------------------
 
                 if (user.equals("Administrator")) {
-                   AdminUser au = new AdminUser(f1, f);
-                   au.loginAdminUser();
+                   au.loginAdminUser(f1, f);
                 }
 
                 // ----------------------------------------------------------------------------------------------------------------

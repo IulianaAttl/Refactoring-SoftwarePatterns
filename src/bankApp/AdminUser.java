@@ -5,23 +5,11 @@ import javax.swing.JOptionPane;
 
 public class AdminUser extends Menu {
    
-    private JFrame f1;
-    private JFrame f;
-    
     public AdminUser() {
         
     }
-    
-    
-    
-    public AdminUser(JFrame f1, JFrame f) {
-        this.f1 = f1;
-        this.f = f;
-    }
 
-
-
-    public void loginAdminUser() {
+    public void loginAdminUser(JFrame f1, JFrame f) {
        boolean loop = true, loop2 = true;
        boolean cont = false;
        while (loop) {
@@ -68,29 +56,4 @@ public class AdminUser extends Menu {
        }
    }
 
-
-
-    public JFrame getF1() {
-        return f1;
-    }
-
-
-
-    public void setF1(JFrame f1) {
-        this.f1 = f1;
-    }
-
-
-
-    public JFrame getF() {
-        return f;
-    }
-
-
-
-    public void setF(JFrame f) {
-        this.f = f;
-    }
-    
-    
 }
