@@ -25,7 +25,6 @@ public class Menu extends JFrame {
     JLabel customerIDLabel, passwordLabel;
     JTextField customerIDTextField, passwordTextField;
     Container content;
-    Customer c1;
     JPanel panel2;
     JButton addCustomer;
     String pps, firstName, surname, dob, customerID;
@@ -279,7 +278,7 @@ public class Menu extends JFrame {
                     if (cont) {
                         f.dispose();
                         loop = false;
-                        customer(customer);
+                        customer();
                     }
                 }
                 // ----------------------------------------------------------------------------------------------------------------------
@@ -1011,7 +1010,7 @@ public class Menu extends JFrame {
 
         deleteCustomer.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                boolean found = true, loop = true;
+                boolean found = true;
 
                 if (customerList.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "There are currently no customers to display. ");
@@ -1024,17 +1023,14 @@ public class Menu extends JFrame {
                         if (aCustomer.getCustomerID().equals(customerID)) {
                             found = true;
                             customerChosen = aCustomer;
-                            loop = false;
                         }
                     }
 
                     if (found == false) {
                         int reply = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
                         if (reply == JOptionPane.YES_OPTION) {
-                            loop = true;
                         } else if (reply == JOptionPane.NO_OPTION) {
                             f.dispose();
-                            loop = false;
                             admin();
                         }
                     } else {
@@ -1051,14 +1047,13 @@ public class Menu extends JFrame {
 
         deleteAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent ae) {
-                boolean found = true, loop = true;
+                boolean found = true;
                 Object customerID = JOptionPane.showInputDialog(f, "Customer ID of Customer from which you wish to delete an account");
 
                 for (Customer aCustomer : customerList) {
                     if (aCustomer.getCustomerID().equals(customerID)) {
                         found = true;
                         customerChosen = aCustomer;
-                        loop = false;
                     }
                 }
 
@@ -1066,10 +1061,8 @@ public class Menu extends JFrame {
                     int reply = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?",JOptionPane.YES_NO_OPTION);
 
                     if (reply == JOptionPane.YES_OPTION) {
-                        loop = true;
                     } else if (reply == JOptionPane.NO_OPTION) {
                         f.dispose();
-                        loop = false;
                         admin();
                     }
                 } else {
@@ -1088,9 +1081,8 @@ public class Menu extends JFrame {
         });
     }
 
-    public void customer(Customer cm) {
+    public void customer() {
         f = new JFrame("Customer Menu");
-        cm = customerChosen;
         f.setSize(400, 300);
         f.setLocation(200, 200);
         f.addWindowListener(new WindowAdapter() {
@@ -1237,7 +1229,7 @@ public class Menu extends JFrame {
                             returnButton.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent ae) {
                                     f.dispose();
-                                    customer(customerChosen);
+                                    customer();
                                 }
                             });
                         }
@@ -1258,7 +1250,7 @@ public class Menu extends JFrame {
                                     if (count == 0) {
                                         JOptionPane.showMessageDialog(f,"Pin entered incorrectly 3 times. ATM card locked.", "Pin",JOptionPane.INFORMATION_MESSAGE);
                                         ((CustomerCurrentAccount) acc).getAtm().setValid(false);
-                                        customer(customerChosen);
+                                        customer();
                                         loop = false;
                                         on = false;
                                     }
@@ -1326,7 +1318,7 @@ public class Menu extends JFrame {
                                                 "Pin entered incorrectly 3 times. ATM card locked.", "Pin",
                                                 JOptionPane.INFORMATION_MESSAGE);
                                         ((CustomerCurrentAccount) acc).getAtm().setValid(false);
-                                        customer(customerChosen);
+                                        customer();
                                         loop = false;
                                         on = false;
                                     }
