@@ -15,20 +15,20 @@ import java.util.Date;
 public class Menu extends JFrame {
 
     private ArrayList<Customer> customerList = new ArrayList<Customer>();
-    private int position = 0;
+    private int menuPosition = 0;
     private String password;
-    private Customer customer = null;
+    private Customer customerChosen = null;
     private CustomerAccount acc = new CustomerAccount();
     JFrame f, f1;
-    JLabel firstNameLabel, surnameLabel, pPPSLabel, dOBLabel;
-    JTextField firstNameTextField, surnameTextField, pPSTextField, dOBTextField;
+    JLabel firstNameLabel, surnameLabel, ppsLabel, dobLabel;
+    JTextField firstNameTextField, surnameTextField, ppsTextField, dobTextField;
     JLabel customerIDLabel, passwordLabel;
     JTextField customerIDTextField, passwordTextField;
     Container content;
-    Customer e;
+    Customer c1;
     JPanel panel2;
-    JButton add;
-    String PPS, firstName, surname, DOB, CustomerID;
+    JButton addCustomer;
+    String pps, firstName, surname, dob, customerID;
 
     public static void main(String[] args) {
         Menu driver = new Menu();
@@ -38,7 +38,7 @@ public class Menu extends JFrame {
     public void menuStart() {
         /*
          * The menuStart method asks the user if they are a new customer, an existing
-         * customer or an admin. It will then start the create customer process if they
+         * customer or an admin. It will then start the create customer process if they 
          * are a new customer, or will ask them to log in if they are an existing
          * customer or admin.
          */
@@ -97,35 +97,35 @@ public class Menu extends JFrame {
 
                     firstNameLabel = new JLabel("First Name:", SwingConstants.RIGHT);
                     surnameLabel = new JLabel("Surname:", SwingConstants.RIGHT);
-                    pPPSLabel = new JLabel("PPS Number:", SwingConstants.RIGHT);
-                    dOBLabel = new JLabel("Date of birth", SwingConstants.RIGHT);
+                    ppsLabel = new JLabel("PPS Number:", SwingConstants.RIGHT);
+                    dobLabel = new JLabel("Date of birth", SwingConstants.RIGHT);
                     firstNameTextField = new JTextField(20);
                     surnameTextField = new JTextField(20);
-                    pPSTextField = new JTextField(20);
-                    dOBTextField = new JTextField(20);
+                    ppsTextField = new JTextField(20);
+                    dobTextField = new JTextField(20);
                     JPanel panel = new JPanel(new GridLayout(6, 2));
                     panel.add(firstNameLabel);
                     panel.add(firstNameTextField);
                     panel.add(surnameLabel);
                     panel.add(surnameTextField);
-                    panel.add(pPPSLabel);
-                    panel.add(pPSTextField);
-                    panel.add(dOBLabel);
-                    panel.add(dOBTextField);
+                    panel.add(ppsLabel);
+                    panel.add(ppsTextField);
+                    panel.add(dobLabel);
+                    panel.add(dobTextField);
 
                     panel2 = new JPanel();
-                    add = new JButton("Add");
+                    addCustomer = new JButton("Add");
 
-                    add.addActionListener(new ActionListener() {
+                    addCustomer.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
-                            PPS = pPSTextField.getText();
+                            pps = ppsTextField.getText();
                             firstName = firstNameTextField.getText();
                             surname = surnameTextField.getText();
-                            DOB = dOBTextField.getText();
+                            dob = dobTextField.getText();
                             password = "";
-                            CustomerID = "ID" + PPS;
+                            customerID = "ID" + pps;
 
-                            add.addActionListener(new ActionListener() {
+                            addCustomer.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
                                     f1.dispose();
                                     boolean loop = true;
@@ -141,11 +141,11 @@ public class Menu extends JFrame {
                                     }
 
                                     ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount>();
-                                    Customer customer = new Customer(PPS, surname, firstName, DOB, CustomerID, password, accounts);
+                                    Customer customer = new Customer(pps, surname, firstName, dob, customerID, password, accounts);
 
                                     customerList.add(customer);
 
-                                    JOptionPane.showMessageDialog(f,"CustomerID = " + CustomerID + "\n Password = " + password, "Customer created.", JOptionPane.INFORMATION_MESSAGE);
+                                    JOptionPane.showMessageDialog(f,"CustomerID = " + customerID + "\n Password = " + password, "Customer created.", JOptionPane.INFORMATION_MESSAGE);
                                     menuStart();
                                     f.dispose();
                                 }
@@ -162,7 +162,7 @@ public class Menu extends JFrame {
                         }
                     });
 
-                    panel2.add(add);
+                    panel2.add(addCustomer);
                     panel2.add(cancel);
 
                     content.add(panel, BorderLayout.CENTER);
@@ -379,7 +379,7 @@ public class Menu extends JFrame {
                         for (Customer aCustomer : customerList) {
                             if (aCustomer.getCustomerID().equals(customerID)) {
                                 found = true;
-                                customer = aCustomer;
+                                customerChosen = aCustomer;
                                 loop = false;
                             }
                         }
@@ -407,8 +407,8 @@ public class Menu extends JFrame {
                             f.setVisible(true);
 
                             JComboBox<String> box = new JComboBox<String>();
-                            for (int i = 0; i < customer.getAccounts().size(); i++) {
-                                box.addItem(customer.getAccounts().get(i).getNumber());
+                            for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                                box.addItem(customerChosen.getAccounts().get(i).getNumber());
                             }
 
                             box.getSelectedItem();
@@ -427,14 +427,14 @@ public class Menu extends JFrame {
                             content.add(boxPanel);
                             content.add(buttonPanel);
 
-                            if (customer.getAccounts().isEmpty()) {
+                            if (customerChosen.getAccounts().isEmpty()) {
                                 JOptionPane.showMessageDialog(f,"This customer has no accounts! \n The admin must add acounts to this customer.", "Oops!", JOptionPane.INFORMATION_MESSAGE);
                                 f.dispose();
                                 admin();
                             } else {
-                                for (int i = 0; i < customer.getAccounts().size(); i++) {
-                                    if (customer.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
-                                        acc = customer.getAccounts().get(i);
+                                for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                                    if (customerChosen.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
+                                        acc = customerChosen.getAccounts().get(i);
                                     }
                                 }
 
@@ -489,7 +489,7 @@ public class Menu extends JFrame {
                         for (Customer aCustomer : customerList) {
                             if (aCustomer.getCustomerID().equals(customerID)) {
                                 found = true;
-                                customer = aCustomer;
+                                customerChosen = aCustomer;
                                 loop = false;
                             }
                         }
@@ -518,8 +518,8 @@ public class Menu extends JFrame {
                             f.setVisible(true);
 
                             JComboBox<String> box = new JComboBox<String>();
-                            for (int i = 0; i < customer.getAccounts().size(); i++) {
-                                box.addItem(customer.getAccounts().get(i).getNumber());
+                            for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                                box.addItem(customerChosen.getAccounts().get(i).getNumber());
                             }
 
                             box.getSelectedItem();
@@ -539,14 +539,14 @@ public class Menu extends JFrame {
                             content.add(boxPanel);
                             content.add(buttonPanel);
 
-                            if (customer.getAccounts().isEmpty()) {
+                            if (customerChosen.getAccounts().isEmpty()) {
                                 JOptionPane.showMessageDialog(f,"This customer has no accounts! \n The admin must add acounts to this customer.","Oops!", JOptionPane.INFORMATION_MESSAGE);
                                 f.dispose();
                                 admin();
                             } else {
-                                for (int i = 0; i < customer.getAccounts().size(); i++) {
-                                    if (customer.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
-                                        acc = customer.getAccounts().get(i);
+                                for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                                    if (customerChosen.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
+                                        acc = customerChosen.getAccounts().get(i);
                                     }
                                 }
 
@@ -606,7 +606,7 @@ public class Menu extends JFrame {
                         for (Customer aCustomer : customerList) {
                             if (aCustomer.getCustomerID().equals(customerID)) {
                                 found = true;
-                                customer = aCustomer;
+                                customerChosen = aCustomer;
                             }
                         }
 
@@ -638,14 +638,14 @@ public class Menu extends JFrame {
 
                     firstNameLabel = new JLabel("First Name:", SwingConstants.LEFT);
                     surnameLabel = new JLabel("Surname:", SwingConstants.LEFT);
-                    pPPSLabel = new JLabel("PPS Number:", SwingConstants.LEFT);
-                    dOBLabel = new JLabel("Date of birth", SwingConstants.LEFT);
+                    ppsLabel = new JLabel("PPS Number:", SwingConstants.LEFT);
+                    dobLabel = new JLabel("Date of birth", SwingConstants.LEFT);
                     customerIDLabel = new JLabel("CustomerID:", SwingConstants.LEFT);
                     passwordLabel = new JLabel("Password:", SwingConstants.LEFT);
                     firstNameTextField = new JTextField(20);
                     surnameTextField = new JTextField(20);
-                    pPSTextField = new JTextField(20);
-                    dOBTextField = new JTextField(20);
+                    ppsTextField = new JTextField(20);
+                    dobTextField = new JTextField(20);
                     customerIDTextField = new JTextField(20);
                     passwordTextField = new JTextField(20);
 
@@ -657,21 +657,21 @@ public class Menu extends JFrame {
                     textPanel.add(firstNameTextField);
                     textPanel.add(surnameLabel);
                     textPanel.add(surnameTextField);
-                    textPanel.add(pPPSLabel);
-                    textPanel.add(pPSTextField);
-                    textPanel.add(dOBLabel);
-                    textPanel.add(dOBTextField);
+                    textPanel.add(ppsLabel);
+                    textPanel.add(ppsTextField);
+                    textPanel.add(dobLabel);
+                    textPanel.add(dobTextField);
                     textPanel.add(customerIDLabel);
                     textPanel.add(customerIDTextField);
                     textPanel.add(passwordLabel);
                     textPanel.add(passwordTextField);
 
-                    firstNameTextField.setText(customer.getFirstName());
-                    surnameTextField.setText(customer.getSurname());
-                    pPSTextField.setText(customer.getPPS());
-                    dOBTextField.setText(customer.getDOB());
-                    customerIDTextField.setText(customer.getCustomerID());
-                    passwordTextField.setText(customer.getPassword());
+                    firstNameTextField.setText(customerChosen.getFirstName());
+                    surnameTextField.setText(customerChosen.getSurname());
+                    ppsTextField.setText(customerChosen.getPPS());
+                    dobTextField.setText(customerChosen.getDOB());
+                    customerIDTextField.setText(customerChosen.getCustomerID());
+                    passwordTextField.setText(customerChosen.getPassword());
 
                     // JLabel label1 = new JLabel("Edit customer details below. The save");
 
@@ -694,12 +694,12 @@ public class Menu extends JFrame {
 
                     saveButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
-                            customer.setFirstName(firstNameTextField.getText());
-                            customer.setSurname(surnameTextField.getText());
-                            customer.setPPS(pPSTextField.getText());
-                            customer.setDOB(dOBTextField.getText());
-                            customer.setCustomerID(customerIDTextField.getText());
-                            customer.setPassword(passwordTextField.getText());
+                            customerChosen.setFirstName(firstNameTextField.getText());
+                            customerChosen.setSurname(surnameTextField.getText());
+                            customerChosen.setPPS(ppsTextField.getText());
+                            customerChosen.setDOB(dobTextField.getText());
+                            customerChosen.setCustomerID(customerIDTextField.getText());
+                            customerChosen.setPassword(passwordTextField.getText());
 
                             JOptionPane.showMessageDialog(null, "Changes Saved.");
                         }
@@ -799,14 +799,14 @@ public class Menu extends JFrame {
 
                     firstNameLabel = new JLabel("First Name:", SwingConstants.LEFT);
                     surnameLabel = new JLabel("Surname:", SwingConstants.LEFT);
-                    pPPSLabel = new JLabel("PPS Number:", SwingConstants.LEFT);
-                    dOBLabel = new JLabel("Date of birth", SwingConstants.LEFT);
+                    ppsLabel = new JLabel("PPS Number:", SwingConstants.LEFT);
+                    dobLabel = new JLabel("Date of birth", SwingConstants.LEFT);
                     customerIDLabel = new JLabel("CustomerID:", SwingConstants.LEFT);
                     passwordLabel = new JLabel("Password:", SwingConstants.LEFT);
                     firstNameTextField = new JTextField(20);
                     surnameTextField = new JTextField(20);
-                    pPSTextField = new JTextField(20);
-                    dOBTextField = new JTextField(20);
+                    ppsTextField = new JTextField(20);
+                    dobTextField = new JTextField(20);
                     customerIDTextField = new JTextField(20);
                     passwordTextField = new JTextField(20);
 
@@ -818,15 +818,15 @@ public class Menu extends JFrame {
 
                     firstNameTextField.setText(customerList.get(0).getFirstName());
                     surnameTextField.setText(customerList.get(0).getSurname());
-                    pPSTextField.setText(customerList.get(0).getPPS());
-                    dOBTextField.setText(customerList.get(0).getDOB());
+                    ppsTextField.setText(customerList.get(0).getPPS());
+                    dobTextField.setText(customerList.get(0).getDOB());
                     customerIDTextField.setText(customerList.get(0).getCustomerID());
                     passwordTextField.setText(customerList.get(0).getPassword());
 
                     firstNameTextField.setEditable(false);
                     surnameTextField.setEditable(false);
-                    pPSTextField.setEditable(false);
-                    dOBTextField.setEditable(false);
+                    ppsTextField.setEditable(false);
+                    dobTextField.setEditable(false);
                     customerIDTextField.setEditable(false);
                     passwordTextField.setEditable(false);
 
@@ -834,10 +834,10 @@ public class Menu extends JFrame {
                     gridPanel.add(firstNameTextField);
                     gridPanel.add(surnameLabel);
                     gridPanel.add(surnameTextField);
-                    gridPanel.add(pPPSLabel);
-                    gridPanel.add(pPSTextField);
-                    gridPanel.add(dOBLabel);
-                    gridPanel.add(dOBTextField);
+                    gridPanel.add(ppsLabel);
+                    gridPanel.add(ppsTextField);
+                    gridPanel.add(dobLabel);
+                    gridPanel.add(dobTextField);
                     gridPanel.add(customerIDLabel);
                     gridPanel.add(customerIDTextField);
                     gridPanel.add(passwordLabel);
@@ -855,11 +855,11 @@ public class Menu extends JFrame {
                     content.add(cancelPanel, BorderLayout.AFTER_LAST_LINE);
                     first.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
-                            position = 0;
+                            menuPosition = 0;
                             firstNameTextField.setText(customerList.get(0).getFirstName());
                             surnameTextField.setText(customerList.get(0).getSurname());
-                            pPSTextField.setText(customerList.get(0).getPPS());
-                            dOBTextField.setText(customerList.get(0).getDOB());
+                            ppsTextField.setText(customerList.get(0).getPPS());
+                            dobTextField.setText(customerList.get(0).getDOB());
                             customerIDTextField.setText(customerList.get(0).getCustomerID());
                             passwordTextField.setText(customerList.get(0).getPassword());
                         }
@@ -867,17 +867,17 @@ public class Menu extends JFrame {
 
                     previous.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
-                            if (position < 1) {
+                            if (menuPosition < 1) {
                                 // don't do anything
                             } else {
-                                position = position - 1;
+                                menuPosition = menuPosition - 1;
 
-                                firstNameTextField.setText(customerList.get(position).getFirstName());
-                                surnameTextField.setText(customerList.get(position).getSurname());
-                                pPSTextField.setText(customerList.get(position).getPPS());
-                                dOBTextField.setText(customerList.get(position).getDOB());
-                                customerIDTextField.setText(customerList.get(position).getCustomerID());
-                                passwordTextField.setText(customerList.get(position).getPassword());
+                                firstNameTextField.setText(customerList.get(menuPosition).getFirstName());
+                                surnameTextField.setText(customerList.get(menuPosition).getSurname());
+                                ppsTextField.setText(customerList.get(menuPosition).getPPS());
+                                dobTextField.setText(customerList.get(menuPosition).getDOB());
+                                customerIDTextField.setText(customerList.get(menuPosition).getCustomerID());
+                                passwordTextField.setText(customerList.get(menuPosition).getPassword());
                             }
                         }
                     });
@@ -885,17 +885,17 @@ public class Menu extends JFrame {
                     next.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
 
-                            if (position == customerList.size() - 1) {
+                            if (menuPosition == customerList.size() - 1) {
                                 // don't do anything
                             } else {
-                                position = position + 1;
+                                menuPosition = menuPosition + 1;
 
-                                firstNameTextField.setText(customerList.get(position).getFirstName());
-                                surnameTextField.setText(customerList.get(position).getSurname());
-                                pPSTextField.setText(customerList.get(position).getPPS());
-                                dOBTextField.setText(customerList.get(position).getDOB());
-                                customerIDTextField.setText(customerList.get(position).getCustomerID());
-                                passwordTextField.setText(customerList.get(position).getPassword());
+                                firstNameTextField.setText(customerList.get(menuPosition).getFirstName());
+                                surnameTextField.setText(customerList.get(menuPosition).getSurname());
+                                ppsTextField.setText(customerList.get(menuPosition).getPPS());
+                                dobTextField.setText(customerList.get(menuPosition).getDOB());
+                                customerIDTextField.setText(customerList.get(menuPosition).getCustomerID());
+                                passwordTextField.setText(customerList.get(menuPosition).getPassword());
                             }
                         }
                     });
@@ -903,14 +903,14 @@ public class Menu extends JFrame {
                     last.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
 
-                            position = customerList.size() - 1;
+                            menuPosition = customerList.size() - 1;
 
-                            firstNameTextField.setText(customerList.get(position).getFirstName());
-                            surnameTextField.setText(customerList.get(position).getSurname());
-                            pPSTextField.setText(customerList.get(position).getPPS());
-                            dOBTextField.setText(customerList.get(position).getDOB());
-                            customerIDTextField.setText(customerList.get(position).getCustomerID());
-                            passwordTextField.setText(customerList.get(position).getPassword());
+                            firstNameTextField.setText(customerList.get(menuPosition).getFirstName());
+                            surnameTextField.setText(customerList.get(menuPosition).getSurname());
+                            ppsTextField.setText(customerList.get(menuPosition).getPPS());
+                            dobTextField.setText(customerList.get(menuPosition).getDOB());
+                            customerIDTextField.setText(customerList.get(menuPosition).getCustomerID());
+                            passwordTextField.setText(customerList.get(menuPosition).getPassword());
                         }
                     });
 
@@ -946,7 +946,7 @@ public class Menu extends JFrame {
                         for (Customer aCustomer : customerList) {
                             if (aCustomer.getCustomerID().equals(customerID)) {
                                 found = true;
-                                customer = aCustomer;
+                                customerChosen = aCustomer;
                             }
                         }
 
@@ -971,7 +971,7 @@ public class Menu extends JFrame {
                                 // create current account
                                 boolean valid = true;
                                 double balance = 0;
-                                String number = String.valueOf("C" + (customerList.indexOf(customer) + 1) * 10  + (customer.getAccounts().size() + 1));// this simple algorithm generates the
+                                String number = String.valueOf("C" + (customerList.indexOf(customerChosen) + 1) * 10  + (customerChosen.getAccounts().size() + 1));// this simple algorithm generates the
                                                                                // account number
                                 ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
                                 int randomPIN = (int) (Math.random() * 9000) + 1000;
@@ -980,7 +980,7 @@ public class Menu extends JFrame {
 
                                 CustomerCurrentAccount current = new CustomerCurrentAccount(atm, number, balance,  transactionList);
 
-                                customer.getAccounts().add(current);
+                                customerChosen.getAccounts().add(current);
                                 JOptionPane.showMessageDialog(f, "Account number = " + number + "\n PIN = " + pin, "Account created.", JOptionPane.INFORMATION_MESSAGE);
 
                                 f.dispose();
@@ -991,13 +991,13 @@ public class Menu extends JFrame {
                                 // create deposit account
 
                                 double balance = 0, interest = 0;
-                                String number = String.valueOf("D" + (customerList.indexOf(customer) + 1) * 10 + (customer.getAccounts().size() + 1));// this simple algorithm generates the
+                                String number = String.valueOf("D" + (customerList.indexOf(customerChosen) + 1) * 10 + (customerChosen.getAccounts().size() + 1));// this simple algorithm generates the
                                                                                // account number
                                 ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 
                                 CustomerDepositAccount deposit = new CustomerDepositAccount(interest, number, balance,  transactionList);
 
-                                customer.getAccounts().add(deposit);
+                                customerChosen.getAccounts().add(deposit);
                                 JOptionPane.showMessageDialog(f, "Account number = " + number, "Account created.", JOptionPane.INFORMATION_MESSAGE);
 
                                 f.dispose();
@@ -1015,7 +1015,7 @@ public class Menu extends JFrame {
 
                 if (customerList.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "There are currently no customers to display. ");
-                    dispose();
+                    dispose(); 
                     admin();
                 } else {
                     Object customerID = JOptionPane.showInputDialog(f, "Customer ID of Customer You Wish to Delete:");
@@ -1023,7 +1023,7 @@ public class Menu extends JFrame {
                     for (Customer aCustomer : customerList) {
                         if (aCustomer.getCustomerID().equals(customerID)) {
                             found = true;
-                            customer = aCustomer;
+                            customerChosen = aCustomer;
                             loop = false;
                         }
                     }
@@ -1038,10 +1038,10 @@ public class Menu extends JFrame {
                             admin();
                         }
                     } else {
-                        if (customer.getAccounts().size() > 0) {
+                        if (customerChosen.getAccounts().size() > 0) {
                             JOptionPane.showMessageDialog(f, "This customer has accounts. \n You must delete a customer's accounts before deleting a customer ","Oops!", JOptionPane.INFORMATION_MESSAGE);
                         } else {
-                            customerList.remove(customer);
+                            customerList.remove(customerChosen);
                             JOptionPane.showMessageDialog(f, "Customer Deleted ", "Success.",JOptionPane.INFORMATION_MESSAGE);
                         }
                     }
@@ -1057,7 +1057,7 @@ public class Menu extends JFrame {
                 for (Customer aCustomer : customerList) {
                     if (aCustomer.getCustomerID().equals(customerID)) {
                         found = true;
-                        customer = aCustomer;
+                        customerChosen = aCustomer;
                         loop = false;
                     }
                 }
@@ -1088,9 +1088,9 @@ public class Menu extends JFrame {
         });
     }
 
-    public void customer(Customer e1) {
+    public void customer(Customer cm) {
         f = new JFrame("Customer Menu");
-        e1 = e;
+        cm = customerChosen;
         f.setSize(400, 300);
         f.setLocation(200, 200);
         f.addWindowListener(new WindowAdapter() {
@@ -1101,7 +1101,7 @@ public class Menu extends JFrame {
 
         f.setVisible(true);
 
-        if (e.getAccounts().size() == 0) {
+        if (customerChosen.getAccounts().size() == 0) {
             JOptionPane.showMessageDialog(f,"This customer does not have any accounts yet. \n An admin must create an account for this customer \n for them to be able to use customer functionality. ", "Oops!", JOptionPane.INFORMATION_MESSAGE);
             f.dispose();
             menuStart();
@@ -1120,13 +1120,13 @@ public class Menu extends JFrame {
 
             JComboBox<String> box = new JComboBox<String>();
 
-            for (int i = 0; i < e.getAccounts().size(); i++) {
-                box.addItem(e.getAccounts().get(i).getNumber());
+            for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                box.addItem(customerChosen.getAccounts().get(i).getNumber());
             }
 
-            for (int i = 0; i < e.getAccounts().size(); i++) {
-                if (e.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
-                    acc = e.getAccounts().get(i);
+            for (int i = 0; i < customerChosen.getAccounts().size(); i++) {
+                if (customerChosen.getAccounts().get(i).getNumber() == box.getSelectedItem()) {
+                    acc = customerChosen.getAccounts().get(i);
                 }
             }
 
@@ -1237,7 +1237,7 @@ public class Menu extends JFrame {
                             returnButton.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent ae) {
                                     f.dispose();
-                                    customer(e);
+                                    customer(customerChosen);
                                 }
                             });
                         }
@@ -1258,7 +1258,7 @@ public class Menu extends JFrame {
                                     if (count == 0) {
                                         JOptionPane.showMessageDialog(f,"Pin entered incorrectly 3 times. ATM card locked.", "Pin",JOptionPane.INFORMATION_MESSAGE);
                                         ((CustomerCurrentAccount) acc).getAtm().setValid(false);
-                                        customer(e);
+                                        customer(customerChosen);
                                         loop = false;
                                         on = false;
                                     }
@@ -1326,7 +1326,7 @@ public class Menu extends JFrame {
                                                 "Pin entered incorrectly 3 times. ATM card locked.", "Pin",
                                                 JOptionPane.INFORMATION_MESSAGE);
                                         ((CustomerCurrentAccount) acc).getAtm().setValid(false);
-                                        customer(e);
+                                        customer(customerChosen);
                                         loop = false;
                                         on = false;
                                     }

@@ -4,10 +4,10 @@ import java.util.ArrayList;
  
 public class Customer {
 
-	String PPS;
+	String pps;
 	String surname;
 	String firstName;
-	String DOB;
+	String dob;
 	String customerID;
 	String password;
 	
@@ -16,22 +16,22 @@ public class Customer {
 	//Blank constructor
 	public Customer()
 	{
-		this.PPS = "";
+		this.pps = "";
 		this.surname = "";
 		this.firstName = "";
-		this.DOB = "";
+		this.dob = "";
 		this.customerID = "";
 		this.password = "";
 		this.accounts = null;
 	}
 	
 	//Constructor with details
-	public Customer(String PPS, String surname, String firstName, String DOB, String customerID, String password, ArrayList<CustomerAccount> accounts)
+	public Customer(String pps, String surname, String firstName, String dob, String customerID, String password, ArrayList<CustomerAccount> accounts)
 	{
-		this.PPS = PPS;
+		this.pps = dob;
 		this.surname = surname;
 		this.firstName = firstName;
-		this.DOB = DOB;
+		this.pps = dob;
 		this.customerID = customerID;
 		this.password = password;;
 		this.accounts = accounts;
@@ -40,7 +40,7 @@ public class Customer {
 	//Accessor methods
 	public String getPPS()
 	{
-		return this.PPS;
+		return this.pps;
 	}
 	
 	public String getSurname()
@@ -55,7 +55,7 @@ public class Customer {
 	
 	public String getDOB()
 	{
-		return this.DOB;
+		return this.dob;
 	}
 	
 	public String getCustomerID()
@@ -74,9 +74,9 @@ public class Customer {
 	}
 	
 	//mutator methods
-	public void setPPS(String PPS)
+	public void setPPS(String pps)
 	{
-		this.PPS = PPS;
+		this.pps = pps;
 	}
 	
 	public void setSurname(String surname)
@@ -89,9 +89,9 @@ public class Customer {
 		this.firstName = firstName;
 	}
 	
-	public void setDOB(String DOB)
+	public void setDOB(String dob)
 	{
-		this.DOB = DOB;
+		this.dob = dob;
 	}
 	
 	public void setCustomerID(String customerID)
@@ -111,10 +111,10 @@ public class Customer {
 	
 	public String toString()
 	{
-		return "PPS number = " + this.PPS + "\n"
+		return "PPS number = " + this.pps + "\n"
 				+ "Surname = " + this.surname + "\n"
 				+ "First Name = " + this.firstName + "\n"
-				+ "Date of Birth = " + this.DOB + "\n"
+				+ "Date of Birth = " + this.dob + "\n"
 				+ "Customer ID = " + this.customerID;
 	}
 	
