@@ -25,8 +25,6 @@ public class Menu extends JFrame {
     private Container content;
     private JPanel panel2;
     private JButton addCustomer;
-    private ExistingUser eu = new ExistingUser();
-    private AdminUser au = new AdminUser();
 
     public static void main(String[] args) {
         Menu driver = new Menu();
@@ -157,6 +155,7 @@ public class Menu extends JFrame {
                 // if user select ADMIN----------------------------------------------------------------------------------------------
 
                 if (user.equals("Administrator")) {
+                   AdminUser au = new AdminUser();
                    au.loginAdminUser(f1, f);
                 }
 
@@ -165,6 +164,7 @@ public class Menu extends JFrame {
                 // ----------------------------------------------------------------------------------------
 
                 if (user.equals("Customer")) {
+                    ExistingUser eu = new ExistingUser();
                     eu.loginExistingUser(f1, f, customerList);
                 }
                  
@@ -1106,12 +1106,14 @@ public class Menu extends JFrame {
 
                     lodgementButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
+                            ExistingUser eu = new ExistingUser();
                             eu.lodge(acc, f);
                         }
                     });
 
                     withdrawButton.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent ae) {
+                            ExistingUser eu = new ExistingUser();
                             eu.withdraw(acc, f);
                         }
                     });
