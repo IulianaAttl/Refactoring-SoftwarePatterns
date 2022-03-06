@@ -155,50 +155,8 @@ public class Menu extends JFrame {
                 // if user select ADMIN----------------------------------------------------------------------------------------------
 
                 if (user.equals("Administrator")) {
-                    boolean loop = true, loop2 = true;
-                    boolean cont = false;
-                    while (loop) {
-                        Object adminUsername = JOptionPane.showInputDialog(f, "Enter Administrator Username:");
-
-                        if (!adminUsername.equals("admin"))// search admin list for admin with matching admin username
-                        {
-                            int reply = JOptionPane.showConfirmDialog(null, null, "Incorrect Username. Try again?",JOptionPane.YES_NO_OPTION);
-                            if (reply == JOptionPane.YES_OPTION) {
-                                loop = true;
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                f1.dispose();
-                                loop = false;
-                                loop2 = false;
-                                menuStart();
-                            }
-                        } else {
-                            loop = false;
-                        }
-                    }
-
-                    while (loop2) {
-                        Object adminPassword = JOptionPane.showInputDialog(f, "Enter Administrator Password;");
-
-                        if (!adminPassword.equals("admin11"))// search admin list for admin with matching admin password
-                        {
-                            int reply = JOptionPane.showConfirmDialog(null, null, "Incorrect Password. Try again?", JOptionPane.YES_NO_OPTION);
-                            if (reply == JOptionPane.YES_OPTION) {
-
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                f1.dispose();
-                                loop2 = false;
-                                menuStart();
-                            }
-                        } else {
-                            loop2 = false;
-                            cont = true;
-                        }
-                    }
-
-                    if (cont) {
-                        loop = false;
-                        admin();
-                    }
+                   AdminUser au = new AdminUser(f1, f);
+                   au.loginAdminUser();
                 }
 
                 // ----------------------------------------------------------------------------------------------------------------
@@ -206,61 +164,10 @@ public class Menu extends JFrame {
                 // ----------------------------------------------------------------------------------------
 
                 if (user.equals("Customer")) {
-                    boolean loop = true, loop2 = true;
-                    boolean cont = false;
-                    boolean found = false;
-                    Customer customer = null;
-                    while (loop) {
-                        Object customerID = JOptionPane.showInputDialog(f, "Enter Customer ID:");
-
-                        for (Customer aCustomer : customerList) {
-                            if (aCustomer.getCustomerID().equals(customerID))// search customer list for matching customer ID
-                            {
-                                found = true;
-                                customer = aCustomer;
-                            }
-                        }
-
-                        if (found == false) {
-                            int reply = JOptionPane.showConfirmDialog(null, null, "User not found. Try again?", JOptionPane.YES_NO_OPTION);
-                            if (reply == JOptionPane.YES_OPTION) {
-                                loop = true;
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                f.dispose();
-                                loop = false;
-                                loop2 = false;
-                                menuStart();
-                            }
-                        } else {
-                            loop = false;
-                        }
-                    }
-
-                    while (loop2) {
-                        Object customerPassword = JOptionPane.showInputDialog(f, "Enter Customer Password;");
-
-                        if (!customer.getPassword().equals(customerPassword))// check if custoemr password is correct
-                        {
-                            int reply = JOptionPane.showConfirmDialog(null, null, "Incorrect password. Try again?", JOptionPane.YES_NO_OPTION);
-                            if (reply == JOptionPane.YES_OPTION) {
-
-                            } else if (reply == JOptionPane.NO_OPTION) {
-                                f.dispose();
-                                loop2 = false;
-                                menuStart();
-                            }
-                        } else {
-                            loop2 = false;
-                            cont = true;
-                        }
-                    }
-
-                    if (cont) {
-                        f.dispose();
-                        loop = false;
-                        customer();
-                    }
+                    ExistingUser eu = new ExistingUser(f1, f, customerList);
+                    eu.loginExistingUser();
                 }
+                 
                 // ----------------------------------------------------------------------------------------------------------------------
             }
         });

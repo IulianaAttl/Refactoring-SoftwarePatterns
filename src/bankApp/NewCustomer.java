@@ -60,4 +60,114 @@ public class NewCustomer extends Menu{
 
         JOptionPane.showMessageDialog(f,"CustomerID = " + customerID + "\n Password = " + password, "Customer created.", JOptionPane.INFORMATION_MESSAGE);
     }
+
+
+
+    public JFrame getF1() {
+        return f1;
+    }
+
+
+
+    public void setF1(JFrame f1) {
+        this.f1 = f1;
+    }
+
+
+
+    public String getPassword() {
+        return password;
+    }
+
+
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+
+
+    public String getSurname() {
+        return surname;
+    }
+
+
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+
+
+    public String getDob() {
+        return dob;
+    }
+
+
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+
+
+    public String getCustomerID() {
+        return customerID;
+    }
+
+
+
+    public void setCustomerID(String customerID) {
+        this.customerID = customerID;
+    }
+
+
+
+    public ArrayList<Customer> getCustomerList() {
+        return customerList;
+    }
+
+
+
+    public void setCustomerList(ArrayList<Customer> customerList) {
+        this.customerList = customerList;
+    }
+
+
+
+    public JFrame getF() {
+        return f;
+    }
+
+
+
+    public void setF(JFrame f) {
+        this.f = f;
+    }
+
+
+
+    public String getPps() {
+        return pps;
+    }
+
+
+
+    public void setPps(String pps) {
+        this.pps = pps;
+    }
+    
+    
 }
