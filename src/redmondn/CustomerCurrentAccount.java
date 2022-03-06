@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CustomerCurrentAccount extends CustomerAccount {
 	
-	ATMCard atm;
+	private ATMCard atm;
 	
 	public CustomerCurrentAccount()
 	{
@@ -27,4 +27,4 @@ public class CustomerCurrentAccount extends CustomerAccount {
 	{
 		this.atm = atm;
 	}
-}
+} 

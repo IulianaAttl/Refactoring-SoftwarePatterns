@@ -16,18 +16,15 @@ public class Menu extends JFrame {
 
     private ArrayList<Customer> customerList = new ArrayList<Customer>();
     private int menuPosition = 0;
-    private String password;
+    private String pps, firstName, surname, dob, customerID,password;
     private Customer customerChosen = null;
     private CustomerAccount acc = new CustomerAccount();
-    JFrame f, f1;
-    JLabel firstNameLabel, surnameLabel, ppsLabel, dobLabel;
-    JTextField firstNameTextField, surnameTextField, ppsTextField, dobTextField;
-    JLabel customerIDLabel, passwordLabel;
-    JTextField customerIDTextField, passwordTextField;
-    Container content;
-    JPanel panel2;
-    JButton addCustomer;
-    String pps, firstName, surname, dob, customerID;
+    private JFrame f, f1;
+    private JLabel firstNameLabel, surnameLabel, ppsLabel, dobLabel, customerIDLabel, passwordLabel;
+    private JTextField firstNameTextField, surnameTextField, ppsTextField, dobTextField, customerIDTextField, passwordTextField;
+    private Container content;
+    private JPanel panel2;
+    private JButton addCustomer;
 
     public static void main(String[] args) {
         Menu driver = new Menu();

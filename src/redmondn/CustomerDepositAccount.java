@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class CustomerDepositAccount extends CustomerAccount {
 	
-   double interestRate;
+   private double interestRate;
 
    public CustomerDepositAccount()
    {

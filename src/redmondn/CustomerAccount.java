@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class CustomerAccount  {
    
-	String number;
-	double balance;
+	private String number;
+	private double balance;
 	
-	ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
+	private ArrayList<AccountTransaction> transactionList = new ArrayList<AccountTransaction>();
 
 	//Blank Constructor
 	public CustomerAccount()
@@ -32,7 +32,7 @@ public class CustomerAccount  {
 		return this.number;
 	}
 	
-	public double getBalance()
+	public double getBalance() 
 	{
 		return this.balance;
 	}

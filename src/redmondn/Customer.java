@@ -4,14 +4,14 @@ import java.util.ArrayList;
  
 public class Customer {
 
-	String pps;
-	String surname;
-	String firstName;
-	String dob;
-	String customerID;
-	String password;
+	private String pps;
+	private String surname;
+	private String firstName;
+	private String dob;
+	private String customerID;
+	private String password;
 	
-	ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount> ();
+	private ArrayList<CustomerAccount> accounts = new ArrayList<CustomerAccount> ();
 
 	//Blank constructor
 	public Customer()
