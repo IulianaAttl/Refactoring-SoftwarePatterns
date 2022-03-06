@@ -12,7 +12,6 @@ public class ExistingUser extends Menu{
         
     }
 
-
     public void loginExistingUser(JFrame f1, JFrame f, ArrayList<Customer> customerList) {
         boolean loop = true, loop2 = true;
         boolean cont = false;
@@ -151,7 +150,6 @@ public class ExistingUser extends Menu{
                     JOptionPane.INFORMATION_MESSAGE);
         }
     }
-    
     
     public void lodge(CustomerAccount acc, JFrame f) {
         boolean loop = true;

@@ -21,8 +21,6 @@ public class NewCustomer extends Menu{
     public NewCustomer() {
         
     }
-    
-    
 
     public NewCustomer(JFrame f1, String password, String surname, String firstName, String dob, String customerID,
             ArrayList<Customer> customerList, JFrame f, String pps) {
@@ -36,8 +34,6 @@ public class NewCustomer extends Menu{
         this.f = f;
         this.pps = pps;
     }
-
-
 
     public void createNewCustomer() {
         f1.dispose();
@@ -60,8 +56,4 @@ public class NewCustomer extends Menu{
 
         JOptionPane.showMessageDialog(f,"CustomerID = " + customerID + "\n Password = " + password, "Customer created.", JOptionPane.INFORMATION_MESSAGE);
     }
-
-
-
-    
 }
