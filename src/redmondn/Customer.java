@@ -1,13 +1,13 @@
 package redmondn;
 
 import java.util.ArrayList; 
-
+ 
 public class Customer {
 
 	String PPS;
 	String surname;
 	String firstName;
-	String DOB ="";
+	String DOB;
 	String customerID;
 	String password;
 	
